@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #cont{
+            width: 80%;
+            margin: 0 auto;
+            border: 3px solid rgb(17, 78, 170);
+            padding: 10px;
+        }
+        .inp{
+            width: 80%;
+            margin: 0 auto;
+        }
+        .inp input{
+            margin: 0 55px;
+        }
+        .inp input[type='submit']{
+            width: 50px;
+            background: green;
+            font-size: 18px;
+            color: white;
+        }
+        .div h3{
+            color: #0059FF;
+        }
+        .div h3:hover{
+            cursor: pointer;
+            color: red;
+        }
+        .div p{
+            text-indent: 2em;
+        }
+    </style>
+    <script src="public/javascripts/jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#btn').click(function(){
+                var tit=$('#tit').val();
+                var tt=$('#texta').val();
+                console.log(tt)
+                console.log(tit)
+                $.ajax({
+                    url:"http://localhost:3000/aa",
+                    type:"post",
+                    data:{title:tit,name:tt},
+                    success:function(e){
+                        console.log(e)
+                        var arr="";
+                        for(i in e){
+                            var ee=e[i]
+                            for(i in ee){
+                                arr+='<div class="div" id:ee[i].id><h3>'+ee[i].title+'</h3><p>'+ee[i].name+'</p>'+'</div>'
+                                // arr+=ee[i].title+'<br>'+ee[i].name+"<br>";
+                            }
+                        }
+                        $('#cont').html(arr);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="cont"></div>
+    <div class="inp">
+        <input type="text" name="" id="tit">
+        <input type="text" name="" id="texta">
+        <input type="submit" name="" id="btn">
+    </div>
+</body>
+</html>
